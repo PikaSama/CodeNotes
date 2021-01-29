@@ -1,0 +1,16 @@
+{
+  "name": "CodeNotes",
+  "version": "1.0.0",
+  "description": "A repository for notes on learning a programming language.",
+  "main": "index.js",
+  "repository": "https://github.com/PikaSama/CodeNotes.git",
+  "author": "PikaSama <pikasama@qq.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  },
+  "scripts": {
+    "format": "prettier --write ./**/*.md"
+  }
+}

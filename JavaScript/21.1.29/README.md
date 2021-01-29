@@ -169,18 +169,6 @@ console.log(window.a);
 console.log(window.b);
 ```
 
-let 关键字可以先声明再赋值，而 const 关键字必须在一开始就被初始化（声明并赋值）。
-
-```javascript
-// 合法
-let a;
-a = 10;
-// 不合法
-const b;
-// 合法
-const c = 10;
-```
-
 const 关键字用于声明一个**常量**（一旦初始化便**不能**再改变值）。
 
 ```javascript
@@ -232,6 +220,18 @@ obj = {
 const arr = [1, 2, 3, 4, 5];
 // 报错（尝试赋值给常量）
 arr = ['1', '2', '3', '4', '5'];
+```
+
+let 关键字可以先声明再赋值，而 const 关键字必须在一开始就被初始化（声明并赋值）。
+
+```javascript
+// 合法
+let a;
+a = 10;
+// 不合法
+const b;
+// 合法
+const c = 10;
 ```
 
 ### String

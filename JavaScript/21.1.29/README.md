@@ -36,7 +36,7 @@ ECMAScript 与 JavaScript 的关系：
 
 document.write()方法可以向 html 页面输出信息
 
-注：alert()会**停止**当前页面代码的运行，在点击确定按钮后继续执行
+**注**：alert()会**停止**当前页面代码的运行，在点击确定按钮后继续执行
 
 ```javascript
 console.log('Hello World!');
@@ -46,11 +46,13 @@ console.log('Hello World!');
 
 下面我们将 JavaScript 简称为 JS
 
--   JS 对大小写敏感
--   JS 语句末需加分号';'
--   JS 忽略多个空格
+-   JS 对**大小写敏感**
+-   JS 语句末需加**分号** ;
+-   JS **忽略**多个空格
 
 ## 变量
+
+本章会介绍一些**基础**的变量类型
 
 ### 类型
 
@@ -66,7 +68,7 @@ console.log('Hello World!');
 
 -   Object：对象
 
-注：数组(Array)，函数(Function)是特殊的对象(Object)
+**注**：数组(Array)，函数(Function)是特殊的对象(Object)
 
 **值类型和引用类型的区别：**
 
@@ -110,8 +112,7 @@ console.log(obj1, obj2);
 -   变量名可以是字母、数字、下划线、美元符号的组合
 -   变量名第一个字符不可以是数字
 -   变量名遵循驼峰命名法，第一个单词开头字母小写，后面的单词开头字母大写
--   变量名不能和 JS 内置关键字相同
--   变量名最好不和 JS 预定的关键字相同（未来可能会出现的功能）
+-   变量名不能和 JS 内置关键字或保留字相同
 
 ### 定义
 
@@ -222,7 +223,7 @@ const arr = [1, 2, 3, 4, 5];
 arr = ['1', '2', '3', '4', '5'];
 ```
 
-let 关键字可以先声明再赋值，而 const 关键字必须在一开始就被初始化（声明并赋值）。
+let 关键字**可以先声明再赋值**，而 const 关键字**必须**在一开始就被**初始化**（声明并赋值）。
 
 ```javascript
 // 合法
@@ -236,10 +237,75 @@ const c = 10;
 
 ### String
 
-使用单/双引号括起来
+使用**单/双引号**括起来
 
 -   使用斜杠 \\ 转义
 -   使用 \\n 换行
 -   使用 \\t 表示制表符(tab)
 
+另一种字符串：模板字符串，使用**反引号** `` 括起来
+
+在模板字符串中，变量可以通过 **${变量}** 这样的表达式引用，同样的里面也可以是 JS 语句，这有些类似于 Shell 在字符串中引用变量的方式
+
+```javascript
+const a = 1;
+const b = 2;
+// 普通字符串
+console.log('A plus B is: ' + (a + b));
+// 模板字符串
+console.log(`A plus B is: ${a + b}`);
+```
+
+这在字符串中使用变量更加方便了
+
+与普通字符串不同的是，使用模板字符串来写多行字符串，**不需要**添加加号 +
+
+```javascript
+// 普通字符串(还得自己加个换行符)
+const str = '123\n' + '456';
+// 模板字符串
+const str2 = `123
+456`;
+// 输出一致：'123'
+//			'456'
+console.log(str, str2);
+```
+
+你还可以使用 String.raw()方法获取 String 类型的值的**原始字符串**
+
+你通常并**不需要**给这个方法加括号，直接在模板字符串前加入这个方法即可
+
+```javascript
+const name = 'John';
+const a = String.raw`Hi\n${name}`;
+// 输出：'Hi\nJohn'
+console.log(a);
+```
+
+**注**：这里的 \n **并不是换行符**
+
 ### Number
+
+Number 包括整数和浮点数（小数）
+
+使用 Number.MAX_VALUE 可以查看 Number 类型的最大值，相反使用 Number.MIN_VALUE 可以查看最小值
+
+```javascript
+// 输出：1.7976931348623157e+308
+console.log(Number.MAX_VALUE);
+// 输出：5e-324
+console.log(Number.MIN_VALUE);
+```
+
+如果数值超过最大值，则为无穷（Infinity），无穷有两种：
+
+-   Infinity：正无穷
+-   -Infinity：负无穷
+
+使用 typeof 检查 Infinity 的类型会返回**number**
+
+NaN 是一个特殊的数字，表示 Not a Number
+
+使用 typeof 检查 NaN 的类型也会返回**number**
+
+使用 JS 进行浮点运算时，会出现**精度丢失**的情况，所以**切忌**在对**精度要求高**的业务场景中使用

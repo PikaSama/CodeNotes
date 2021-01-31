@@ -27,10 +27,14 @@ ECMAScript 与 JavaScript 的关系：
 
 ## Hello World
 
--   console：控制台
-    -   log：输出消息
-    -   warn：输出警告
-    -   error：输出错误
+### console 控制台
+
+我们可以用 console 对象中的方法向控制台输出信息
+
+-   log：输出消息
+-   info：同上
+-   warn：输出警告
+-   error：输出错误
 
 在浏览器中，也可使用 alert()弹出窗口信息
 
@@ -56,7 +60,7 @@ console.log('Hello World!');
 
 ### 类型
 
-**值类型：**
+#### 值类型
 
 -   String: 字符串
 -   Number: 数字
@@ -64,7 +68,7 @@ console.log('Hello World!');
 -   Null: 空值
 -   Undefined: 未定义
 
-**引用类型：**
+#### 引用类型
 
 -   Object：对象
 
@@ -159,7 +163,7 @@ let a = 'hi';
 console.log(a);
 ```
 
-在**全局作用域**中，var 关键字声明的变量属于 window 对象，可以用 window.变量名访问；但 let 关键字声明的变量不属于 window 对象，不可以用 window.变量名访问
+在**全局作用域**中，var 关键字声明的变量属于 window 对象，可以用 window.变量名访问；但 let 关键字声明的变量**不属于** window 对象，不可以用 window.变量名访问
 
 ```javascript
 var a = 'hi';
@@ -237,13 +241,17 @@ const c = 10;
 
 ### String
 
-使用**单/双引号**括起来
+使用**单/双引号**括起来，使用 typeof 检查 String 类型会返回**string**
+
+这里列举一些常用的特殊字符：
 
 -   使用斜杠 \\ 转义
 -   使用 \\n 换行
 -   使用 \\t 表示制表符(tab)
 
-另一种字符串：模板字符串，使用**反引号** `` 括起来
+#### 模板字符串
+
+还有另一种字符串叫模板字符串，它使用**反引号** `` 括起来
 
 在模板字符串中，变量可以通过 **${变量}** 这样的表达式引用，同样的里面也可以是 JS 语句，这有些类似于 Shell 在字符串中引用变量的方式
 
@@ -288,7 +296,7 @@ console.log(a);
 
 Number 包括整数和浮点数（小数）
 
-使用 Number.MAX_VALUE 可以查看 Number 类型的最大值，相反使用 Number.MIN_VALUE 可以查看最小值
+使用 Number.**MAX_VALUE** 可以查看 Number 类型的**最大值**，相反使用 Number.**MIN_VALUE** 可以查看**最小值**
 
 ```javascript
 // 输出：1.7976931348623157e+308
@@ -297,15 +305,135 @@ console.log(Number.MAX_VALUE);
 console.log(Number.MIN_VALUE);
 ```
 
+#### Infinity
+
 如果数值超过最大值，则为无穷（Infinity），无穷有两种：
 
 -   Infinity：正无穷
 -   -Infinity：负无穷
 
-使用 typeof 检查 Infinity 的类型会返回**number**
+使用 typeof 检查 Infinity 类型会返回**number**
+
+#### NaN
 
 NaN 是一个特殊的数字，表示 Not a Number
 
-使用 typeof 检查 NaN 的类型也会返回**number**
+使用 typeof 检查 NaN 类型也会返回**number**
 
-使用 JS 进行浮点运算时，会出现**精度丢失**的情况，所以**切忌**在对**精度要求高**的业务场景中使用
+**注：**使用 JS 进行浮点运算时，会出现**精度丢失**的情况，所以**切忌**在对**精度要求高**的业务场景中使用
+
+### Boolean
+
+布尔值只有两种类型：
+
+-   true：真
+-   false：假
+
+布尔值常用于**逻辑判断**，使用 typeof 检查类型时会返回**boolean**
+
+### Null
+
+Null（空值）类型的值只有一个，即**null**
+
+null 值用于表示一个**空的对象**
+
+使用 typeof 检查 Null 类型时会返回**object**
+
+### Undefined
+
+Undefined（未定义）类型的值也只有一个，即**undefined**
+
+当你声明一个变量而不赋值时，此时变量的值就是**undefined**
+
+使用 typeof 检查 Undefined 类型时会返回**undefined**
+
+## 强制类型转换
+
+### 转换为 String
+
+#### toString() 方法
+
+-   **用法：**任何值.toString()
+
+toString()方法**不会**影响到原变量的值，而时将转换结果作为**返回值**
+
+**注：**Null 类型和 Undefined 类型**没有**toString()方法，所以在调用这个方法时会**报错**
+
+#### String() 函数
+
+-   **用法：**String(参数)
+
+参数可以是任何值，下面列举了 String() 函数对一些类型的处理方式：
+
+-   Number & Boolean：**直接调用**toString() 方法
+-   Null & Undefined：转换为**字符串**形式的"null"或"undefined"
+
+### 转换为 Number
+
+#### Number() 函数
+
+-   用法：Number(参数)
+
+参数可以是任何值，下面列举了 Number() 函数对一些类型的处理方式：
+
+-   String
+    1. 如果是**纯数字**的字符串，直接将其转换为**数字**
+    2. 如果字符串中**含有非数字**的内容，则转换为**NaN**
+    3. 如果字符串是一个**空字符串**或**全是空格的字符串**则转换为**0**
+-   Boolean
+    -   true 转为**1**
+    -   false 转为**0**
+
+#### parseInt() & parseFloat() 函数
+
+-   用法：parseInt(参数) / parseFloat(参数)
+
+参数要求是**字符串**，如果传入的参数不是字符串，会先**转换成字符串再操作**
+
+下面是两个函数的**区别**：
+
+-   parseInt() 方法用于把一个字符串转换为**整数**
+-   parseFloat() 方法用于把一个字符串转换为**浮点数**
+
+**注：**在使用 parseInt() 函数时，建议传入第二个参数来指定以什么**进制**解析内容，原因可见 Toc "进制"
+
+### 转换为 Boolean
+
+#### Boolean() 函数
+
+-   用法：Boolean(参数)
+
+参数可以是任何值，下面列举了 Boolean() 函数对一些类型的处理方式：
+
+-   Number：除去 0 和 NaN，其余都返回 true
+-   String：除去空字符串，其余都返回 true
+-   Null & Undefined：返回 false
+
+只要值是[Truthy](https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy) 的，那返回值就是 true
+
+## 进制
+
+JS 中，如果要表示 16 进制的数字，需以 0x 开头
+
+```javascript
+const num = 0x10;
+// 输出：16
+console.log(num);
+```
+
+如果要表示 8 进制的数字，需以 0 开头
+
+```javascript
+const num = 010;
+// 输出：8
+console.log(num);
+```
+
+如果要表示 2 进制的数字，需以 0b 开头
+
+**注：**
+
+1. **不是**所有浏览器都能正确地识别**8 进制**的数字，有可能会当作**10 进制**处理
+2. **不是**所有浏览器都支持**2 进制**数字（的表达式）
+
+## 运算符

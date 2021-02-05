@@ -760,3 +760,169 @@ console.log('\u0061');
 2. 当条件表达式的值是**false**，执行**语句 2**，返回执行结果
 
 **注：**我**不推荐**使用**嵌套**的三元运算符，这降低了代码的**可读性与维护性**，你可以选择使用**if 语句**代替
+
+### 运算优先级
+
+这里列了一套完整的符号运算优先级表格，[点击查阅](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#table)
+
+表格**不需要死记硬背**，当使用多个运算符进行运算的结果与你的预期结果**不符**时，你可以使用**括号** () 更改运算优先级
+
+## 代码块
+
+一条条语句构成了一个程序
+
+在 JS 中，语句是按**自上而下**的顺序执行的，我们使用大括号 {} 为语句进行分组，这个 {} 所包含的语句就是一个**代码块**
+
+## 流程控制
+
+通过流程控制语句可以**控制**程序执行流程，使程序可以根据一定条件**选择执行**语句
+
+### if
+
+if 语句也称**条件判断语句**。if 语句在执行时对表达式进行求值，如果**true**执行语句，**false**不执行语句
+
+**用法：**
+
+if (条件表达式) {
+
+​ 语句
+
+}
+
+```javascript
+const a = 1;
+// 条件不成立，不执行
+if (a > 1) {
+    console.log('a > 1');
+}
+// 完整输出：'a is: 1'
+console.log(`a is: ${a}`);
+
+const b = 2;
+// 条件成立，执行
+if (b > 1) {
+    console.log('b > 1');
+}
+// 完整输出：'b > 1'
+// 			'b is: 2'
+console.log(`b is: ${b}`);
+```
+
+### if...else
+
+if..else 语句是 if 语句的另一种写法。if...else 语句在执行时对表达式进行求值，如果**true**执行**if**后面的语句，**false**则执行**else**后面的语句
+
+**用法：**
+
+if (条件表达式) {
+
+​ 语句
+
+} else {
+
+​ 语句
+
+}
+
+```javascript
+const a = 1;
+// 不成立，输出：'a <= 1'
+if (a > 1) {
+    console.log('a > 1');
+} else {
+    console.log('a <= 1');
+}
+```
+
+### if...else if...else
+
+if...else if...else 语句也是 if 语句的另一种写法。if...else if...else 语句在执行时，会从上而下依次对表达式进行求值判断，如果值为**true**，执行**当前语句**，如果为**false**，则继续**向下判断**，如果所有条件**都不成立**，则执行**else**后面的语句
+
+**用法：**
+
+if (条件表达式) {
+
+​ 语句
+
+} else if (条件表达式) {
+
+​ 语句
+
+} else {
+
+​ 语句
+
+}
+
+```javascript
+const a = 73;
+// 输出：'a > 70'
+if (a > 90) {
+    console.log('a > 90');
+} else if (a > 80) {
+    console.log('80 < a <= 90');
+} else if (a > 70) {
+    console.log('70 < a <= 80');
+} else if (a > 60) {
+    console.log('60 < a <= 70');
+} else {
+    console.log('a <= 60');
+}
+```
+
+在该语句中，**只会有一个**代码块会被执行，一旦代码块被执行了，则**直接结束**语句
+
+相关练习：[if 语句练习](https://github.com/PikaSama/CodePractice/blob/master/JavaScript/if%E7%BB%83%E4%B9%A0/index.html)
+
+### switch
+
+switch 语句也叫**条件分支语句**，对不同的值执行相应的语句
+
+switch 语句会将 case 后的表达式的值与 switch 后的表达式的值进行**严格相等比较**(===)，如果为**true**，从当前 case 处执行代码，如果为**false**，则继续**向下比较**，如果**所有**case 的比较结果是**false**，则执行**default**处的代码
+
+**用法：**
+
+switch (条件表达式) {
+
+​ case 条件表达式: {
+
+​ 语句
+
+​ break;
+
+​ }
+
+​ default: {
+
+​ 语句
+
+​ break;
+
+​ }
+
+}
+
+**注：**break 语句用于**退出**switch 语句，如果没有 break 语句，那么代码会从当前 case 处执行到 default 处
+
+我推荐对每一个 case 以及 default 加上**大括号** {}，这样在语句中有**词法声明**时，**不会**造成变量污染的问题
+
+switch 语句可以与 if 语句有着**相似**的功能，两者在一定情况下可以**互换使用**，而它们在不同的应用场景下有着各自的优势，可**根据需求选择**
+
+```javascript
+const a = 1;
+// 输出：'壹'
+switch (a) {
+    case 1: {
+        console.log('壹');
+        break;
+    }
+    case 2: {
+        console.log('贰');
+        break;
+    }
+    default: {
+        console.log('Error');
+        break;
+    }
+}
+```
